@@ -10,14 +10,14 @@ namespace PowerOutageParser
 {
     public class APIClient
     {
-        public static string GetOblenergoPage(int placeId, string date)
+        public static string GetOblenergoPage(int placeId, string date, PowerOutageEnum type)
         {
-            var request = (HttpWebRequest)WebRequest.Create("https://www.oblenergo.kharkov.ua/tabledisconnect/");
+            var request = (HttpWebRequest)WebRequest.Create("https://www.oblenergo.kharkov.ua/"+(type == PowerOutageEnum.Emergency ? "tabledisconnect" : "tabledisconnectplan"));
             var postData = $"start[date]={date}";
             postData += $"&operator={placeId}";
             postData += @"&end[date]=";
-            postData += "&form-1KCiA9-OxYf0yDQsfbvOC98P-7InQjfBoKTVVVF2Jcg";
-            postData += "&form_id=tabledisconnect_page_form";
+            postData +=  "&" + (type == PowerOutageEnum.Emergency ? "form-1KCiA9-OxYf0yDQsfbvOC98P-7InQjfBoKTVVVF2Jcg" : "form-3mEyHcEDxxdCtNNJR9_bxn85oKToemxRZ4l151Y-DtI");
+            postData +=  "&" + (type == PowerOutageEnum.Emergency ? "form_id=tabledisconnect_page_form" : "tabledisconnectplan-page-form");
             var data = Encoding.ASCII.GetBytes(postData);
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";

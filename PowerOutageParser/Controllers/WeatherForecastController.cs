@@ -28,8 +28,6 @@ namespace PowerOutageParser.Controllers
         [HttpGet]
         public String Get()
         {
-            var ggg = WebUtility.HtmlEncode("<p>I <3 This ger mjuka strukturerade fransar för en fulländad och sofistikerad look. Most Wanted kollektion består av silkesliknande fransar som är tillverkade för hand. Kitet innehåller ögonfranslim. </p>"); 
-            var df = Regex.Replace("", "\\<[^\\>]*\\>", string.Empty);
             var page = APIClient.GetOblenergoPage(24, "26-04-2020");
             var places = Utils.Parser.GetPlaces(page);
             var ff = Utils.Parser.GetDistrictPowerOffInformation(page);
