@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +12,7 @@ namespace PowerOutageParser.Controllers
     public class PowerOutageController : ControllerBase
     {
 
-        [HttpGet]
+        [HttpGet("districsPowerInfo")]
         public async Task<HashSet<AddressModel>> DistricsPowerInfo(int placeId, string date = "26-04-2020")
         {
             var page = APIClient.GetOblenergoPage(placeId, "26-04-2020");
@@ -21,7 +20,7 @@ namespace PowerOutageParser.Controllers
             return placesInfo;
         }
 
-        [HttpGet]
+        [HttpGet("districs")]
         public async Task<List<PlaceModel>> Districs()
         {
             var page = APIClient.GetOblenergoPage(24, "26-04-2020");
